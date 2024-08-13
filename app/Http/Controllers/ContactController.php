@@ -71,4 +71,11 @@ class ContactController extends Controller
 
         return redirect()->route('contacts.list')->with('success', 'Contact updated successfully.');
     }
+
+    public function delete(int $id)
+    {
+        $contact = Contact::findOrFail($id);
+        $contact->delete();
+        return redirect()->route('contacts.list')->with('success', 'Contact deleted successfully.');
+    }
 }
