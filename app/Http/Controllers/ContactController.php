@@ -24,7 +24,8 @@ class ContactController extends Controller
             $query->orderBy($sort, 'asc');
         }
 
-        $contacts = $query->paginate(10);
+        $contacts = $query->get();
+
         return view('contact.list', compact('contacts'));
     }
 
@@ -41,5 +42,11 @@ class ContactController extends Controller
         ]);
         Contact::create($request->all());
         return redirect()->route('contacts.list')->with('success', 'Contact created successfully.');
+    }
+
+    public function show(int $id)
+    {
+        $contact = Contact::findOrFail($id);
+        return view('contact.show', compact('contact'));
     }
 }

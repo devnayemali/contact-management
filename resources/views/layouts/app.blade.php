@@ -33,7 +33,7 @@
         </div>
     </header>
 
-    <main>
+    <main class="mb-5 pb-4">
         <div class="container mt-4">
             <div class="row">
                 <div class="col-12">

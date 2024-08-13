@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-lg-7">
                     <div class="form-group">
-                        <input type="text" name="search" class="form-control" placeholder="Search by name or email"
+                        <input type="text" required name="search" class="form-control" placeholder="Search by name or email"
                             value="{{ request('search') }}">
                     </div>
                 </div>
@@ -22,12 +22,12 @@
             <thead>
                 <tr>
                     <th><a class="text-decoration-none cursor-pointer"
-                            href="{{ route('contacts.list', ['sort' => 'name']) }}">Name</a></th>
+                            href="{{ route('contacts.list', ['sort' => 'name', 'search' => request('search')]) }}">Name</a></th>
                     <th>Email</th>
                     <th>Phone</th>
                     <th>Address</th>
                     <th><a class="text-decoration-none cursor-pointer"
-                            href="{{ route('contacts.list', ['sort' => 'created_at']) }}">Created at</a></th>
+                            href="{{ route('contacts.list', ['sort' => 'created_at', 'search' => request('search')]) }}">Created at</a></th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -40,7 +40,7 @@
                         <td>{{ $contact->address }}</td>
                         <td>{{ $contact->created_at }}</td>
                         <td>
-                            {{-- <a href="{{ route('contacts.show', $contact->id) }}" class="btn btn-info btn-sm">View</a> --}}
+                            <a href="{{ route('contacts.show', $contact->id) }}" class="btn btn-info btn-sm">View</a>
                             {{-- <a href="{{ route('contacts.edit', $contact->id) }}" class="btn btn-warning btn-sm">Edit</a> --}}
                             {{-- <form action="{{ route('contacts.destroy', $contact->id) }}" method="POST"
                                 style="display: inline;">
@@ -54,6 +54,6 @@
             </tbody>
         </table>
 
-        {{ $contacts->links() }}
+        {{-- {{ $contacts->links() }} --}}
     </div>
 @endsection
