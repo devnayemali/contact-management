@@ -7,9 +7,25 @@ use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
-    public function list()
+    public function list(Request $request)
     {
-        return view('contact.list');
+        $query = Contact::query();
+
+        // Search functionality
+        if ($request->has('search')) {
+            $search = $request->get('search');
+            $query->where('name', 'like', "%{$search}%")
+                ->orWhere('email', 'like', "%{$search}%");
+        }
+
+        // Sorting functionality
+        if ($request->has('sort')) {
+            $sort = $request->get('sort');
+            $query->orderBy($sort, 'asc');
+        }
+
+        $contacts = $query->paginate(10);
+        return view('contact.list', compact('contacts'));
     }
 
     public function create()

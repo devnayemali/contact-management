@@ -12,11 +12,22 @@
 <body>
     <header class="bg-light">
         <div class="container">
-            <div class="row">
-                <div class="col-12">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
                     <nav class="navbar navbar-expand-lg navbar-light">
                         <a class="navbar-brand" href="{{ route('contacts.list') }}">Contact Management</a>
                     </nav>
+                </div>
+                <div class="col-lg-6">
+                    <ul class="nav justify-content-end">
+                        <li><a href="{{ route('contacts.list') }}"
+                                class="text-decoration-none ms-4 text-danger {{ Request::routeIs('contacts.list') ? 'text-danger' : 'text-dark' }}">Contact
+                                list</a></li>
+
+                        <li><a href="{{ route('contacts.create') }}"
+                                class="text-decoration-none ms-4 {{ Request::routeIs('contacts.create') ? 'text-danger' : 'text-dark' }}">Contact
+                                create</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
