@@ -49,4 +49,26 @@ class ContactController extends Controller
         $contact = Contact::findOrFail($id);
         return view('contact.show', compact('contact'));
     }
+
+    public function edit(int $id)
+    {
+        $contact = Contact::findOrFail($id);
+        return view('contact.edit', compact('contact'));
+    }
+
+    public function update(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:contacts,email,' . $request->id,
+        ]);
+
+        // Extract only the fields you want to update
+        $data = $request->only(['name', 'email', 'phone', 'address']);
+
+        // Update the contact using the filtered data
+        Contact::where('id', $request->id)->update($data);
+
+        return redirect()->route('contacts.list')->with('success', 'Contact updated successfully.');
+    }
 }
