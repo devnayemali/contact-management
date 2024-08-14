@@ -43,30 +43,37 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($contacts as $contact)
-                        <tr>
-                            <td>{{ $contact->name }}</td>
-                            <td>{{ $contact->email }}</td>
-                            <td>{{ $contact->phone }}</td>
-                            <td>{{ $contact->address }}</td>
-                            <td>{{ $contact->created_at }}</td>
-                            <td>{{ $contact->updated_at }}</td>
-                            <td>
-                                <div class="d-flex gap-3">
-                                    <a href="{{ route('contacts.show', $contact->id) }}"
-                                        class="btn btn-info btn-sm">View</a>
-                                    <a href="{{ route('contact.edit', $contact->id) }}"
-                                        class="btn btn-warning btn-sm">Edit</a>
-                                    <form action="{{ route('contact.delete', $contact->id) }}" method="POST"
-                                        style="display: inline;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                    </form>
-                                </div>
-                            </td>
+                    @if (count($contacts) > 0)
+                        @foreach ($contacts as $contact)
+                            <tr>
+                                <td>{{ $contact->name }}</td>
+                                <td>{{ $contact->email }}</td>
+                                <td>{{ $contact->phone }}</td>
+                                <td>{{ $contact->address }}</td>
+                                <td>{{ $contact->created_at }}</td>
+                                <td>{{ $contact->updated_at }}</td>
+                                <td>
+                                    <div class="d-flex gap-1">
+                                        <a href="{{ route('contacts.show', $contact->id) }}"
+                                            class="btn btn-info btn-sm">View</a>
+                                        <a href="{{ route('contact.edit', $contact->id) }}"
+                                            class="btn btn-warning btn-sm">Edit</a>
+                                        <form action="{{ route('contact.delete', $contact->id) }}" method="POST"
+                                            style="display: inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @else
+                        <tr class="text-center">
+                            <td colspan="7">No contacts found</td>
                         </tr>
-                    @endforeach
+                    @endif
+
                 </tbody>
             </table>
         </div>

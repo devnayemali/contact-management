@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container mt-3">
         <div class="d-flex justify-content-between">
             <h3>Show Contact</h3>
             <div>
