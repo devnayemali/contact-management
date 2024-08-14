@@ -3,8 +3,9 @@
 use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 
-
-// Route::get('/contacts', [ContactController::class, 'list'])->name('contact.list');
+Route::get('/', function () {
+    return view('welcome');
+});
 Route::get('/contacts', [ContactController::class, 'list'])->name('contacts.list');
 Route::get('/contacts/create', [ContactController::class, 'create'])->name('contacts.create');
 Route::post('/contacts', [ContactController::class, 'store'])->name('contacts.store');
